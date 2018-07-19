@@ -13,8 +13,7 @@ internal typealias ParserT<A> = Parser<[Token], (), A>
 internal typealias LazyParserT<A> = () -> ParserT<A>
 /**
  
- <params>     ::= <identifier>
- | <identifier>, <params>
+ <params>     ::= <identifier> | <identifier>, <params>
  <prototype>  ::= <identifier> "(" <params> ")"
 
  <extern>     ::= "extern" <prototype> ";"
@@ -28,6 +27,8 @@ internal typealias LazyParserT<A> = () -> ParserT<A>
  <ifelse>     ::= "if" <expr> "then" <expr> "else" <expr>
 
   <definition> ::= "def" <prototype> <expr> ";"
+ 
+ <expr>       ::= <binary> | <call> | <identifier> | <number> | <ifelse> | "(" <expr> ")"
  */
 
 internal let ksParserIdentifier: LazyParserT<String> = fmap(satisfy{ (token: Token) -> Bool in
@@ -67,7 +68,7 @@ internal let ksParserParams: LazyParserT<[String]> =
 //<prototype>  ::= <identifier> "(" <params> ")"
 internal let ksParserParenParams = between(ksParserLeftParen, ksParserRightParen, ksParserParams)
 internal let ksParserPrototype: LazyParserT<Prototype> =
-  fmap(ksParserIdentifier >>> ksParserParams) { (id, params) -> Prototype in
+  fmap(ksParserIdentifier >>> ksParserParenParams) { (id, params) -> Prototype in
     Prototype(name: id, params: params)
 }
 
@@ -127,15 +128,14 @@ internal let ksParserNumber: LazyParserT<Double> = fmap(satisfy{ (token: Token) 
 
 internal let ksParserVariable: LazyParserT<Expr> = fmap(ksParserIdentifier, Expr.variable)
 
-internal let ksParserExpr: LazyParserT<Expr> = ksParserExpr_()
 
-internal func ksParserExpr_() -> LazyParserT<Expr> {
-  return  try_(ksParserBinary)
+internal func ksParserExpr() -> ParserT<Expr> {
+  return (try_(ksParserBinary)
     <|> try_(ksParserCall)
     <|> try_(ksParserVariable)
     <|> try_(fmap(ksParserNumber, Expr.number))
     <|> try_(ksParserIfElse)
-    <|> try_(between(ksParserLeftParen, ksParserRightParen, {ksParserExpr_()}()))
+    <|> try_(between(ksParserLeftParen, ksParserRightParen, {ksParserExpr()}))
+    )()
 }
-
 

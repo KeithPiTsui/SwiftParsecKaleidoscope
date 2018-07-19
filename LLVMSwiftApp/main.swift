@@ -10,7 +10,19 @@ import PaversParsec
 
 let input = ParserStateS("def foo(n) (n * 100.35);")
 let result = KsLexer.tokenList.unParser(input)
-print(result)
+
+if case let ParserResult.consumed(reply) = result {
+  let rr = reply()
+  if case let .ok(value, _, _) = rr {
+    print(value)
+    let tokenInput = ParserState<[Token],()>(stateInput: value,
+                                             statePos: SourcePos(sourceName: #function),
+                                             stateUser: ())
+    let parserResult = ksParserDefinition().unParser(tokenInput)
+    print(parserResult)
+  }
+}
+
 
 
 //extension String: Error {}

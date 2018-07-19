@@ -35,7 +35,7 @@ extension SourcePos: Comparable {
 extension SourcePos {
   /// Create a new 'SourcePos' with the given source name,
   /// and line number and column number set to 1, the upper left.
-  init(sourceName: String) {
+  public init(sourceName: String) {
     self.sourceName = sourceName
     self.line = 1
     self.column = 1
