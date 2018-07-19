@@ -8,6 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		53D980722100293E00C3EFE9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980712100293E00C3EFE9 /* main.swift */; };
+		53D980A32100298300C3EFE9 /* IRValue+Kinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807A2100298300C3EFE9 /* IRValue+Kinds.swift */; };
+		53D980A42100298300C3EFE9 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807B2100298300C3EFE9 /* Constant.swift */; };
+		53D980A52100298300C3EFE9 /* JIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807C2100298300C3EFE9 /* JIT.swift */; };
+		53D980A62100298300C3EFE9 /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807D2100298300C3EFE9 /* Metadata.swift */; };
+		53D980A72100298300C3EFE9 /* TargetMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807E2100298300C3EFE9 /* TargetMachine.swift */; };
+		53D980A82100298300C3EFE9 /* Function+Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807F2100298300C3EFE9 /* Function+Attributes.swift */; };
+		53D980A92100298300C3EFE9 /* IRBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980802100298300C3EFE9 /* IRBuilder.swift */; };
+		53D980AA2100298300C3EFE9 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980812100298300C3EFE9 /* Global.swift */; };
+		53D980AB2100298300C3EFE9 /* Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980822100298300C3EFE9 /* Initialization.swift */; };
+		53D980AC2100298300C3EFE9 /* IRGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980832100298300C3EFE9 /* IRGlobal.swift */; };
+		53D980AD2100298300C3EFE9 /* FunctionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980842100298300C3EFE9 /* FunctionType.swift */; };
+		53D980AE2100298300C3EFE9 /* ObjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980852100298300C3EFE9 /* ObjectFile.swift */; };
+		53D980AF2100298300C3EFE9 /* PassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980862100298300C3EFE9 /* PassManager.swift */; };
+		53D980B02100298300C3EFE9 /* PointerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980872100298300C3EFE9 /* PointerType.swift */; };
+		53D980B12100298300C3EFE9 /* TargetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980882100298300C3EFE9 /* TargetData.swift */; };
+		53D980B22100298300C3EFE9 /* OpCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980892100298300C3EFE9 /* OpCode.swift */; };
+		53D980B32100298300C3EFE9 /* BasicBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9808A2100298300C3EFE9 /* BasicBlock.swift */; };
+		53D980B42100298300C3EFE9 /* MetadataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9808B2100298300C3EFE9 /* MetadataType.swift */; };
+		53D980B52100298300C3EFE9 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9808C2100298300C3EFE9 /* Alias.swift */; };
+		53D980B62100298300C3EFE9 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9808D2100298300C3EFE9 /* Instruction.swift */; };
+		53D980B72100298300C3EFE9 /* IntType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9808E2100298300C3EFE9 /* IntType.swift */; };
+		53D980B82100298300C3EFE9 /* StructType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9808F2100298300C3EFE9 /* StructType.swift */; };
+		53D980B92100298300C3EFE9 /* IRValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980902100298300C3EFE9 /* IRValue.swift */; };
+		53D980BA2100298300C3EFE9 /* ArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980912100298300C3EFE9 /* ArrayType.swift */; };
+		53D980BB2100298300C3EFE9 /* VectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980922100298300C3EFE9 /* VectorType.swift */; };
+		53D980BC2100298300C3EFE9 /* DIBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980932100298300C3EFE9 /* DIBuilder.swift */; };
+		53D980BD2100298300C3EFE9 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980942100298300C3EFE9 /* Switch.swift */; };
+		53D980BE2100298300C3EFE9 /* FloatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980952100298300C3EFE9 /* FloatType.swift */; };
+		53D980BF2100298300C3EFE9 /* Use.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980962100298300C3EFE9 /* Use.swift */; };
+		53D980C02100298300C3EFE9 /* X86MMXType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980972100298300C3EFE9 /* X86MMXType.swift */; };
+		53D980C12100298300C3EFE9 /* LabelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980982100298300C3EFE9 /* LabelType.swift */; };
+		53D980C22100298300C3EFE9 /* PhiNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980992100298300C3EFE9 /* PhiNode.swift */; };
+		53D980C32100298300C3EFE9 /* VoidType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9809A2100298300C3EFE9 /* VoidType.swift */; };
+		53D980C42100298300C3EFE9 /* TokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9809B2100298300C3EFE9 /* TokenType.swift */; };
+		53D980C52100298300C3EFE9 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9809C2100298300C3EFE9 /* Module.swift */; };
+		53D980C62100298300C3EFE9 /* IRType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9809D2100298300C3EFE9 /* IRType.swift */; };
+		53D980C72100298300C3EFE9 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9809E2100298300C3EFE9 /* Function.swift */; };
+		53D980C82100298300C3EFE9 /* Clause.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9809F2100298300C3EFE9 /* Clause.swift */; };
+		53D980C92100298300C3EFE9 /* Linkage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980A02100298300C3EFE9 /* Linkage.swift */; };
+		53D980CA2100298300C3EFE9 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980A12100298300C3EFE9 /* Call.swift */; };
+		53D980CB2100298300C3EFE9 /* MemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980A22100298300C3EFE9 /* MemoryBuffer.swift */; };
+		53D980CF21002B7900C3EFE9 /* libLLVM.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D980CD210029ED00C3EFE9 /* libLLVM.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +67,48 @@
 /* Begin PBXFileReference section */
 		53D9806E2100293E00C3EFE9 /* LLVMSwiftApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LLVMSwiftApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D980712100293E00C3EFE9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		53D9807A2100298300C3EFE9 /* IRValue+Kinds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IRValue+Kinds.swift"; sourceTree = "<group>"; };
+		53D9807B2100298300C3EFE9 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		53D9807C2100298300C3EFE9 /* JIT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JIT.swift; sourceTree = "<group>"; };
+		53D9807D2100298300C3EFE9 /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
+		53D9807E2100298300C3EFE9 /* TargetMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetMachine.swift; sourceTree = "<group>"; };
+		53D9807F2100298300C3EFE9 /* Function+Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Function+Attributes.swift"; sourceTree = "<group>"; };
+		53D980802100298300C3EFE9 /* IRBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRBuilder.swift; sourceTree = "<group>"; };
+		53D980812100298300C3EFE9 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		53D980822100298300C3EFE9 /* Initialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initialization.swift; sourceTree = "<group>"; };
+		53D980832100298300C3EFE9 /* IRGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRGlobal.swift; sourceTree = "<group>"; };
+		53D980842100298300C3EFE9 /* FunctionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionType.swift; sourceTree = "<group>"; };
+		53D980852100298300C3EFE9 /* ObjectFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectFile.swift; sourceTree = "<group>"; };
+		53D980862100298300C3EFE9 /* PassManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassManager.swift; sourceTree = "<group>"; };
+		53D980872100298300C3EFE9 /* PointerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointerType.swift; sourceTree = "<group>"; };
+		53D980882100298300C3EFE9 /* TargetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetData.swift; sourceTree = "<group>"; };
+		53D980892100298300C3EFE9 /* OpCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpCode.swift; sourceTree = "<group>"; };
+		53D9808A2100298300C3EFE9 /* BasicBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicBlock.swift; sourceTree = "<group>"; };
+		53D9808B2100298300C3EFE9 /* MetadataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetadataType.swift; sourceTree = "<group>"; };
+		53D9808C2100298300C3EFE9 /* Alias.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
+		53D9808D2100298300C3EFE9 /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		53D9808E2100298300C3EFE9 /* IntType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntType.swift; sourceTree = "<group>"; };
+		53D9808F2100298300C3EFE9 /* StructType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructType.swift; sourceTree = "<group>"; };
+		53D980902100298300C3EFE9 /* IRValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRValue.swift; sourceTree = "<group>"; };
+		53D980912100298300C3EFE9 /* ArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayType.swift; sourceTree = "<group>"; };
+		53D980922100298300C3EFE9 /* VectorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorType.swift; sourceTree = "<group>"; };
+		53D980932100298300C3EFE9 /* DIBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DIBuilder.swift; sourceTree = "<group>"; };
+		53D980942100298300C3EFE9 /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		53D980952100298300C3EFE9 /* FloatType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatType.swift; sourceTree = "<group>"; };
+		53D980962100298300C3EFE9 /* Use.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Use.swift; sourceTree = "<group>"; };
+		53D980972100298300C3EFE9 /* X86MMXType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X86MMXType.swift; sourceTree = "<group>"; };
+		53D980982100298300C3EFE9 /* LabelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelType.swift; sourceTree = "<group>"; };
+		53D980992100298300C3EFE9 /* PhiNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhiNode.swift; sourceTree = "<group>"; };
+		53D9809A2100298300C3EFE9 /* VoidType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoidType.swift; sourceTree = "<group>"; };
+		53D9809B2100298300C3EFE9 /* TokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenType.swift; sourceTree = "<group>"; };
+		53D9809C2100298300C3EFE9 /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
+		53D9809D2100298300C3EFE9 /* IRType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IRType.swift; sourceTree = "<group>"; };
+		53D9809E2100298300C3EFE9 /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		53D9809F2100298300C3EFE9 /* Clause.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clause.swift; sourceTree = "<group>"; };
+		53D980A02100298300C3EFE9 /* Linkage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Linkage.swift; sourceTree = "<group>"; };
+		53D980A12100298300C3EFE9 /* Call.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
+		53D980A22100298300C3EFE9 /* MemoryBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryBuffer.swift; sourceTree = "<group>"; };
+		53D980CD210029ED00C3EFE9 /* libLLVM.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLLVM.dylib; path = ../../../../usr/local/Cellar/llvm/6.0.1/lib/libLLVM.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53D980CF21002B7900C3EFE9 /* libLLVM.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +128,7 @@
 			children = (
 				53D980702100293E00C3EFE9 /* LLVMSwiftApp */,
 				53D9806F2100293E00C3EFE9 /* Products */,
+				53D980CC210029ED00C3EFE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +143,75 @@
 		53D980702100293E00C3EFE9 /* LLVMSwiftApp */ = {
 			isa = PBXGroup;
 			children = (
+				53D980782100298300C3EFE9 /* Sources */,
 				53D980712100293E00C3EFE9 /* main.swift */,
 			);
 			path = LLVMSwiftApp;
+			sourceTree = "<group>";
+		};
+		53D980782100298300C3EFE9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				53D980792100298300C3EFE9 /* LLVM */,
+			);
+			name = Sources;
+			path = LLVMSwift/Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		53D980792100298300C3EFE9 /* LLVM */ = {
+			isa = PBXGroup;
+			children = (
+				53D9807A2100298300C3EFE9 /* IRValue+Kinds.swift */,
+				53D9807B2100298300C3EFE9 /* Constant.swift */,
+				53D9807C2100298300C3EFE9 /* JIT.swift */,
+				53D9807D2100298300C3EFE9 /* Metadata.swift */,
+				53D9807E2100298300C3EFE9 /* TargetMachine.swift */,
+				53D9807F2100298300C3EFE9 /* Function+Attributes.swift */,
+				53D980802100298300C3EFE9 /* IRBuilder.swift */,
+				53D980812100298300C3EFE9 /* Global.swift */,
+				53D980822100298300C3EFE9 /* Initialization.swift */,
+				53D980832100298300C3EFE9 /* IRGlobal.swift */,
+				53D980842100298300C3EFE9 /* FunctionType.swift */,
+				53D980852100298300C3EFE9 /* ObjectFile.swift */,
+				53D980862100298300C3EFE9 /* PassManager.swift */,
+				53D980872100298300C3EFE9 /* PointerType.swift */,
+				53D980882100298300C3EFE9 /* TargetData.swift */,
+				53D980892100298300C3EFE9 /* OpCode.swift */,
+				53D9808A2100298300C3EFE9 /* BasicBlock.swift */,
+				53D9808B2100298300C3EFE9 /* MetadataType.swift */,
+				53D9808C2100298300C3EFE9 /* Alias.swift */,
+				53D9808D2100298300C3EFE9 /* Instruction.swift */,
+				53D9808E2100298300C3EFE9 /* IntType.swift */,
+				53D9808F2100298300C3EFE9 /* StructType.swift */,
+				53D980902100298300C3EFE9 /* IRValue.swift */,
+				53D980912100298300C3EFE9 /* ArrayType.swift */,
+				53D980922100298300C3EFE9 /* VectorType.swift */,
+				53D980932100298300C3EFE9 /* DIBuilder.swift */,
+				53D980942100298300C3EFE9 /* Switch.swift */,
+				53D980952100298300C3EFE9 /* FloatType.swift */,
+				53D980962100298300C3EFE9 /* Use.swift */,
+				53D980972100298300C3EFE9 /* X86MMXType.swift */,
+				53D980982100298300C3EFE9 /* LabelType.swift */,
+				53D980992100298300C3EFE9 /* PhiNode.swift */,
+				53D9809A2100298300C3EFE9 /* VoidType.swift */,
+				53D9809B2100298300C3EFE9 /* TokenType.swift */,
+				53D9809C2100298300C3EFE9 /* Module.swift */,
+				53D9809D2100298300C3EFE9 /* IRType.swift */,
+				53D9809E2100298300C3EFE9 /* Function.swift */,
+				53D9809F2100298300C3EFE9 /* Clause.swift */,
+				53D980A02100298300C3EFE9 /* Linkage.swift */,
+				53D980A12100298300C3EFE9 /* Call.swift */,
+				53D980A22100298300C3EFE9 /* MemoryBuffer.swift */,
+			);
+			path = LLVM;
+			sourceTree = "<group>";
+		};
+		53D980CC210029ED00C3EFE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53D980CD210029ED00C3EFE9 /* libLLVM.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +271,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53D980BC2100298300C3EFE9 /* DIBuilder.swift in Sources */,
+				53D980B92100298300C3EFE9 /* IRValue.swift in Sources */,
+				53D980AF2100298300C3EFE9 /* PassManager.swift in Sources */,
+				53D980BB2100298300C3EFE9 /* VectorType.swift in Sources */,
+				53D980C82100298300C3EFE9 /* Clause.swift in Sources */,
+				53D980A72100298300C3EFE9 /* TargetMachine.swift in Sources */,
+				53D980C02100298300C3EFE9 /* X86MMXType.swift in Sources */,
+				53D980AD2100298300C3EFE9 /* FunctionType.swift in Sources */,
+				53D980B62100298300C3EFE9 /* Instruction.swift in Sources */,
+				53D980A82100298300C3EFE9 /* Function+Attributes.swift in Sources */,
+				53D980C42100298300C3EFE9 /* TokenType.swift in Sources */,
+				53D980B52100298300C3EFE9 /* Alias.swift in Sources */,
+				53D980A32100298300C3EFE9 /* IRValue+Kinds.swift in Sources */,
+				53D980AB2100298300C3EFE9 /* Initialization.swift in Sources */,
+				53D980C12100298300C3EFE9 /* LabelType.swift in Sources */,
 				53D980722100293E00C3EFE9 /* main.swift in Sources */,
+				53D980B02100298300C3EFE9 /* PointerType.swift in Sources */,
+				53D980BD2100298300C3EFE9 /* Switch.swift in Sources */,
+				53D980A92100298300C3EFE9 /* IRBuilder.swift in Sources */,
+				53D980AC2100298300C3EFE9 /* IRGlobal.swift in Sources */,
+				53D980A62100298300C3EFE9 /* Metadata.swift in Sources */,
+				53D980C22100298300C3EFE9 /* PhiNode.swift in Sources */,
+				53D980CB2100298300C3EFE9 /* MemoryBuffer.swift in Sources */,
+				53D980A42100298300C3EFE9 /* Constant.swift in Sources */,
+				53D980C32100298300C3EFE9 /* VoidType.swift in Sources */,
+				53D980B42100298300C3EFE9 /* MetadataType.swift in Sources */,
+				53D980BF2100298300C3EFE9 /* Use.swift in Sources */,
+				53D980B12100298300C3EFE9 /* TargetData.swift in Sources */,
+				53D980C92100298300C3EFE9 /* Linkage.swift in Sources */,
+				53D980CA2100298300C3EFE9 /* Call.swift in Sources */,
+				53D980B82100298300C3EFE9 /* StructType.swift in Sources */,
+				53D980A52100298300C3EFE9 /* JIT.swift in Sources */,
+				53D980BE2100298300C3EFE9 /* FloatType.swift in Sources */,
+				53D980C52100298300C3EFE9 /* Module.swift in Sources */,
+				53D980BA2100298300C3EFE9 /* ArrayType.swift in Sources */,
+				53D980C62100298300C3EFE9 /* IRType.swift in Sources */,
+				53D980B72100298300C3EFE9 /* IntType.swift in Sources */,
+				53D980AE2100298300C3EFE9 /* ObjectFile.swift in Sources */,
+				53D980B22100298300C3EFE9 /* OpCode.swift in Sources */,
+				53D980B32100298300C3EFE9 /* BasicBlock.swift in Sources */,
+				53D980AA2100298300C3EFE9 /* Global.swift in Sources */,
+				53D980C72100298300C3EFE9 /* Function.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +437,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S4N5M3749;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/llvm/6.0.1/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/llvm/6.0.1/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -254,6 +449,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S4N5M3749;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/llvm/6.0.1/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/llvm/6.0.1/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
