@@ -86,10 +86,16 @@ class Lexer {
         // Handle single-scalar tokens, like comma,
         // leftParen, rightParen, and the operators
         let singleTokMapping: [Character: Token] = [
-            ",": .comma, "(": .leftParen, ")": .rightParen,
-            ";": .semicolon, "+": .operator(.plus), "-": .operator(.minus),
-            "*": .operator(.times), "/": .operator(.divide),
-            "%": .operator(.mod), "=": .operator(.equals)
+            ",": .comma,
+            "(": .leftParen,
+            ")": .rightParen,
+            ";": .semicolon,
+            "+": .operator(.plus),
+            "-": .operator(.minus),
+            "*": .operator(.times),
+            "/": .operator(.divide),
+            "%": .operator(.mod),
+            "=": .operator(.equals)
         ]
 
         if let tok = singleTokMapping[char] {

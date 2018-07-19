@@ -17,9 +17,9 @@ do {
     throw "usage: kaleidoscope <file>"
   }
   
-  let input = try String(contentsOfFile: CommandLine.arguments[1])
-  let toks = Lexer(input: input).lex()
-  let file = try Parser(tokens: toks).parseFile()
+  let input: String = try String(contentsOfFile: CommandLine.arguments[1])
+  let toks: [Token] = Lexer(input: input).lex()
+  let file: File = try Parser(tokens: toks).parseFile()
   let irGen = IRGenerator(file: file)
   try irGen.emit()
   try irGen.module.verify()

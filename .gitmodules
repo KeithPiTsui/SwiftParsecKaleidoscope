@@ -1,3 +1,6 @@
 [submodule "LLVMSwift"]
 	path = LLVMSwift
 	url = https://github.com/llvm-swift/LLVMSwift.git
+[submodule "Pavers"]
+	path = Pavers
+	url = https://github.com/KeithPiTsui/Pavers.git
