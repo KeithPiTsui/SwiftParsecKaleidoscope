@@ -50,11 +50,6 @@
 		53D980CA2100298300C3EFE9 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980A12100298300C3EFE9 /* Call.swift */; };
 		53D980CB2100298300C3EFE9 /* MemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980A22100298300C3EFE9 /* MemoryBuffer.swift */; };
 		53D980D0210032CD00C3EFE9 /* libLLVM.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D980CD210029ED00C3EFE9 /* libLLVM.dylib */; };
-		53EFE9F8210033E00051CBF4 /* REPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFE9F7210033E00051CBF4 /* REPL.swift */; };
-		53EFE9F9210034370051CBF4 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980D4210033B800C3EFE9 /* AST.swift */; };
-		53EFE9FA2100343B0051CBF4 /* IRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980D2210033B800C3EFE9 /* IRGenerator.swift */; };
-		53EFE9FB2100343E0051CBF4 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980D5210033B800C3EFE9 /* Lexer.swift */; };
-		53EFE9FC210034410051CBF4 /* KParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980D3210033B800C3EFE9 /* KParser.swift */; };
 		53EFEA1C210036C00051CBF4 /* KsLexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFEA1B210036C00051CBF4 /* KsLexer.swift */; };
 		53EFEBD5210038EA0051CBF4 /* PaversFRP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EFEBCC210038E90051CBF4 /* PaversFRP.framework */; };
 		53EFEBDA210038EA0051CBF4 /* PaversFRPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFEBD9210038EA0051CBF4 /* PaversFRPTests.swift */; };
@@ -556,6 +551,7 @@
 		53EFED64210039300051CBF4 /* ParserStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserStream.swift; sourceTree = "<group>"; };
 		53EFED65210039300051CBF4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		53EFED67210039300051CBF4 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
+		53EFEDAB2100621C0051CBF4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -700,6 +696,7 @@
 		53D980CC210029ED00C3EFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53EFEDAB2100621C0051CBF4 /* AppKit.framework */,
 				53D980CD210029ED00C3EFE9 /* libLLVM.dylib */,
 			);
 			name = Frameworks;
@@ -1461,12 +1458,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				53D980BC2100298300C3EFE9 /* DIBuilder.swift in Sources */,
-				53EFE9FC210034410051CBF4 /* KParser.swift in Sources */,
 				53D980B92100298300C3EFE9 /* IRValue.swift in Sources */,
-				53EFE9FA2100343B0051CBF4 /* IRGenerator.swift in Sources */,
 				53D980AF2100298300C3EFE9 /* PassManager.swift in Sources */,
 				53D980BB2100298300C3EFE9 /* VectorType.swift in Sources */,
-				53EFE9F9210034370051CBF4 /* AST.swift in Sources */,
 				53D980C82100298300C3EFE9 /* Clause.swift in Sources */,
 				53D980A72100298300C3EFE9 /* TargetMachine.swift in Sources */,
 				53D980C02100298300C3EFE9 /* X86MMXType.swift in Sources */,
@@ -1489,7 +1483,6 @@
 				53D980A42100298300C3EFE9 /* Constant.swift in Sources */,
 				53D980C32100298300C3EFE9 /* VoidType.swift in Sources */,
 				53D980B42100298300C3EFE9 /* MetadataType.swift in Sources */,
-				53EFE9F8210033E00051CBF4 /* REPL.swift in Sources */,
 				53D980BF2100298300C3EFE9 /* Use.swift in Sources */,
 				53D980B12100298300C3EFE9 /* TargetData.swift in Sources */,
 				53D980C92100298300C3EFE9 /* Linkage.swift in Sources */,
@@ -1502,7 +1495,6 @@
 				53D980BA2100298300C3EFE9 /* ArrayType.swift in Sources */,
 				53D980C62100298300C3EFE9 /* IRType.swift in Sources */,
 				53D980B72100298300C3EFE9 /* IntType.swift in Sources */,
-				53EFE9FB2100343E0051CBF4 /* Lexer.swift in Sources */,
 				53D980AE2100298300C3EFE9 /* ObjectFile.swift in Sources */,
 				53D980B22100298300C3EFE9 /* OpCode.swift in Sources */,
 				53D980B32100298300C3EFE9 /* BasicBlock.swift in Sources */,
@@ -1876,6 +1868,7 @@
 		53D980762100293E00C3EFE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S4N5M3749;
 				HEADER_SEARCH_PATHS = /usr/local/Cellar/llvm/6.0.1/include;
@@ -1889,6 +1882,7 @@
 		53D980772100293E00C3EFE9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5S4N5M3749;
 				HEADER_SEARCH_PATHS = /usr/local/Cellar/llvm/6.0.1/include;
@@ -1902,6 +1896,7 @@
 		53EFEBDE210038EA0051CBF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1919,6 +1914,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.521qw.PaversFRP;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1931,6 +1927,7 @@
 		53EFEBDF210038EA0051CBF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1948,6 +1945,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.521qw.PaversFRP;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1998,6 +1996,7 @@
 		53EFED17210039180051CBF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2015,6 +2014,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.521qw.PaversParsec;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -2027,6 +2027,7 @@
 		53EFED18210039180051CBF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -2044,6 +2045,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.521qw.PaversParsec;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

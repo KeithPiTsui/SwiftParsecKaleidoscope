@@ -28,3 +28,9 @@ public struct Parser<S, U, A> {
 public typealias ParserS<A> = Parser<String, (), A>
 public typealias LazyParser<S, U, A> = () -> Parser<S, U, A>
 public typealias LazyParserS<A> = LazyParser<String, (), A>
+
+extension Parser {
+  public init (_ f: @escaping (ParserState<S, U>) -> ParserResult<Reply<S, U, A>>) {
+    self.unParser = f
+  }
+}
