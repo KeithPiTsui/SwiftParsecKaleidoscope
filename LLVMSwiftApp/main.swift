@@ -12,8 +12,6 @@ let input = ParserStateS("def foo(n) (n * 100.35);")
 let result = KsLexer.tokenList.unParser(input)
 print(result)
 
-//[LLVMSwiftApp.Token.def, LLVMSwiftApp.Token.identifier("foo"), LLVMSwiftApp.Token.leftParen, LLVMSwiftApp.Token.identifier("n"), LLVMSwiftApp.Token.rightParen, LLVMSwiftApp.Token.leftParen, LLVMSwiftApp.Token.identifier("n"), LLVMSwiftApp.Token.operator(LLVMSwiftApp.BinaryOperator.times), LLVMSwiftApp.Token.number(100.0), LLVMSwiftApp.Token.rightParen, LLVMSwiftApp.Token.semicolon]:Array<Token>
-
 
 //extension String: Error {}
 //

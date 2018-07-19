@@ -43,6 +43,16 @@ public func between<S, U, A, O, C> (_ open: Parser<S, U, O>, _ close: Parser<S, 
     return open >>- {_ in  p >>- {a in close >>- {_ in pure(a) } } }
 }
 
+public func between<S, U, A, O, C> (_ open: @escaping LazyParser<S, U, O>,
+                                    _ close: @escaping LazyParser<S, U, C>,
+                                    _ p: @escaping LazyParser<S, U, A>)
+  -> LazyParser<S, U, A> {
+    return open >>- {_ in  p >>- {a in close >>- {_ in pure(a) as LazyParser<S, U, A> } } }
+}
+
+
+
+
 //skipMany1 :: (Stream s m t) => ParsecT s u m a -> ParsecT s u m ()
 //skipMany1 p         = do{ _ <- p; skipMany p }
 public func skipMany1<S, U, A> (_ p: Parser<S, U, A>) -> Parser<S, U, ()> {

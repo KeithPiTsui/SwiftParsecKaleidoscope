@@ -248,6 +248,10 @@
 		53EFEDA22100393F0051CBF4 /* PaversFRP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EFEBCC210038E90051CBF4 /* PaversFRP.framework */; };
 		53EFEDA5210039AE0051CBF4 /* PaversFRP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EFEBCC210038E90051CBF4 /* PaversFRP.framework */; };
 		53EFEDA6210039AE0051CBF4 /* PaversParsec.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EFED05210039180051CBF4 /* PaversParsec.framework */; };
+		53EFEDAE210069850051CBF4 /* KsToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFEDAD210069850051CBF4 /* KsToken.swift */; };
+		53EFEDB1210069D70051CBF4 /* PaversParsecAugumention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFEDB0210069D70051CBF4 /* PaversParsecAugumention.swift */; };
+		53EFEDB521006A520051CBF4 /* KsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFEDB421006A520051CBF4 /* KsParser.swift */; };
+		53EFEDB721006EAB0051CBF4 /* KsAST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFEDB621006EAB0051CBF4 /* KsAST.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -552,6 +556,10 @@
 		53EFED65210039300051CBF4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		53EFED67210039300051CBF4 /* Expression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		53EFEDAB2100621C0051CBF4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		53EFEDAD210069850051CBF4 /* KsToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KsToken.swift; sourceTree = "<group>"; };
+		53EFEDB0210069D70051CBF4 /* PaversParsecAugumention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaversParsecAugumention.swift; sourceTree = "<group>"; };
+		53EFEDB421006A520051CBF4 /* KsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KsParser.swift; sourceTree = "<group>"; };
+		53EFEDB621006EAB0051CBF4 /* KsAST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KsAST.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,7 +610,6 @@
 		53D980652100293E00C3EFE9 = {
 			isa = PBXGroup;
 			children = (
-				53EFE9FD2100360B0051CBF4 /* ThirdParties */,
 				53D980702100293E00C3EFE9 /* LLVMSwiftApp */,
 				53EFEBCD210038E90051CBF4 /* PaversFRP */,
 				53EFEBD8210038EA0051CBF4 /* PaversFRPTests */,
@@ -628,6 +635,7 @@
 		53D980702100293E00C3EFE9 /* LLVMSwiftApp */ = {
 			isa = PBXGroup;
 			children = (
+				53EFEDAF210069AB0051CBF4 /* Utilities */,
 				53EFEA1A210036A00051CBF4 /* KaleidoscopeWithParsec */,
 				53D980D12100339400C3EFE9 /* Kaleidoscope */,
 				53D980782100298300C3EFE9 /* Sources */,
@@ -714,17 +722,11 @@
 			path = Kaleidoscope;
 			sourceTree = "<group>";
 		};
-		53EFE9FD2100360B0051CBF4 /* ThirdParties */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ThirdParties;
-			sourceTree = "<group>";
-		};
 		53EFEA1A210036A00051CBF4 /* KaleidoscopeWithParsec */ = {
 			isa = PBXGroup;
 			children = (
-				53EFEA1B210036C00051CBF4 /* KsLexer.swift */,
+				53EFEDB321006A450051CBF4 /* Parser */,
+				53EFEDB221006A3B0051CBF4 /* Lexer */,
 			);
 			path = KaleidoscopeWithParsec;
 			sourceTree = "<group>";
@@ -1259,6 +1261,32 @@
 			path = Expression;
 			sourceTree = "<group>";
 		};
+		53EFEDAF210069AB0051CBF4 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				53EFEDB0210069D70051CBF4 /* PaversParsecAugumention.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		53EFEDB221006A3B0051CBF4 /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+				53EFEA1B210036C00051CBF4 /* KsLexer.swift */,
+				53EFEDAD210069850051CBF4 /* KsToken.swift */,
+			);
+			path = Lexer;
+			sourceTree = "<group>";
+		};
+		53EFEDB321006A450051CBF4 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				53EFEDB421006A520051CBF4 /* KsParser.swift */,
+				53EFEDB621006EAB0051CBF4 /* KsAST.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1462,6 +1490,7 @@
 				53D980AF2100298300C3EFE9 /* PassManager.swift in Sources */,
 				53D980BB2100298300C3EFE9 /* VectorType.swift in Sources */,
 				53D980C82100298300C3EFE9 /* Clause.swift in Sources */,
+				53EFEDB1210069D70051CBF4 /* PaversParsecAugumention.swift in Sources */,
 				53D980A72100298300C3EFE9 /* TargetMachine.swift in Sources */,
 				53D980C02100298300C3EFE9 /* X86MMXType.swift in Sources */,
 				53D980AD2100298300C3EFE9 /* FunctionType.swift in Sources */,
@@ -1484,6 +1513,7 @@
 				53D980C32100298300C3EFE9 /* VoidType.swift in Sources */,
 				53D980B42100298300C3EFE9 /* MetadataType.swift in Sources */,
 				53D980BF2100298300C3EFE9 /* Use.swift in Sources */,
+				53EFEDB521006A520051CBF4 /* KsParser.swift in Sources */,
 				53D980B12100298300C3EFE9 /* TargetData.swift in Sources */,
 				53D980C92100298300C3EFE9 /* Linkage.swift in Sources */,
 				53D980CA2100298300C3EFE9 /* Call.swift in Sources */,
@@ -1492,8 +1522,10 @@
 				53D980BE2100298300C3EFE9 /* FloatType.swift in Sources */,
 				53D980C52100298300C3EFE9 /* Module.swift in Sources */,
 				53EFEA1C210036C00051CBF4 /* KsLexer.swift in Sources */,
+				53EFEDAE210069850051CBF4 /* KsToken.swift in Sources */,
 				53D980BA2100298300C3EFE9 /* ArrayType.swift in Sources */,
 				53D980C62100298300C3EFE9 /* IRType.swift in Sources */,
+				53EFEDB721006EAB0051CBF4 /* KsAST.swift in Sources */,
 				53D980B72100298300C3EFE9 /* IntType.swift in Sources */,
 				53D980AE2100298300C3EFE9 /* ObjectFile.swift in Sources */,
 				53D980B22100298300C3EFE9 /* OpCode.swift in Sources */,

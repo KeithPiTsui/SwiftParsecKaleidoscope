@@ -29,3 +29,13 @@ extension String: ParserStream {
     return String(self.dropFirst())
   }
 }
+
+extension Array: ParserStream {
+  public func first() -> Element? {
+    return self.first
+  }
+
+  public func tail() -> Array<Element> {
+    return Array(self.dropFirst())
+  }
+}
