@@ -8,7 +8,8 @@
 
 import PaversParsec
 
-let input = ParserStateS("def foo(n) (n * 100.35);")
+let input = ParserStateS("extern sqrt(n); def foo(n) (n * sqrt(n * 200) + 57 * n % 2);")
+//let input = ParserStateS("sqrt(n * 200)")
 let result = KsLexer.tokenList.unParser(input)
 
 if case let ParserResult.consumed(reply) = result {
@@ -18,10 +19,14 @@ if case let ParserResult.consumed(reply) = result {
     let tokenInput = ParserState<[Token],()>(stateInput: value,
                                              statePos: SourcePos(sourceName: #function),
                                              stateUser: ())
-    let parserResult: ParserResult<Reply<[Token], (), Definition>>
-      = ksParserDefinition().unParser(tokenInput)
+//    let parserResult: ParserResult<Reply<[Token], (), Definition>>
+//      = ksParserDefinition().unParser(tokenInput)
 //    let parserResult
 //      = ksParserExtern.unParser(tokenInput)
+    let parserResult
+          = ksParserFile().unParser(tokenInput)
+//    let parserResult
+//      = ksParserExpr().unParser(tokenInput)
     print(parserResult)
 //    print("Okay")
   }

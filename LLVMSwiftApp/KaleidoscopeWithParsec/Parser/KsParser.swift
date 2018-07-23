@@ -17,7 +17,7 @@ internal typealias LazyParserT<A> = () -> ParserT<A>
  <prototype>  ::= <identifier> "(" <params> ")"
  <extern>     ::= "extern" <prototype> ";"
  <operator>   ::= "+" | "-" | "*" | "/" | "%"
-
+ 
  {<arguments>}  ::= {<expr>} ("," {<expr>} )*
  
  
@@ -81,7 +81,7 @@ internal let ksParserPrototype: ParserT<Prototype> =
 //<extern>     ::= "extern" <prototype> ";"
 internal let ksParserExtern: ParserT<Prototype> =
   (ksParserExternKeyword >>> ksParserPrototype >>> ksParserSemicolon)
-  .fmap{(_, proto, _) in proto}
+    .fmap{(_, proto, _) in proto} <?> "Extern"
 
 internal let ksParserIf: ParserT<()> = satisfy(tokenCaseMatch(.if)).fmap(terminal)
 
@@ -121,26 +121,26 @@ internal let ksParserParenArguments: LazyParserT<[Expr]> =
 }
 
 internal let ksParserCall: LazyParserT<Expr> =
-  fmap(ksParserIdentifier >>> ksParserParenArguments, Expr.call)
+  fmap(ksParserIdentifier >>> ksParserParenArguments, Expr.call) <?> "Function Call"
 
 
 /// {<ifelse>}     ::= "if" {<expr>} "then" {<expr>} "else" {<expr>}
 internal let ksParserIfElse: LazyParserT<Expr> =
   fmap(ksParserIf >>> ksParserExpr >>> ksParserThen >>> ksParserExpr >>>  ksParserElse >>> ksParserExpr){
     (_, expr1, _, expr2, _, expr3) -> Expr in Expr.ifelse(expr1, expr2, expr3)
-}
+} <?> "If-then-else construction"
 
 /// {<definition>} ::= "def" <prototype> {<expr>} ";"
 internal let ksParserDefinition: LazyParserT<Definition> =
   fmap(ksParserDef >>> ksParserPrototype >>> ksParserExpr >>> ksParserSemicolon) {
     (_, proto, expr, _) -> Definition in Definition(prototype: proto, expr: expr)
-}
+} <?> "Definition"
 
 /// {<parenthesized Expr>} =  "(" {<expr>} ")"
 internal let ksParserParenExpr: LazyParserT<Expr> =
   fmap(ksParserLeftParen >>> ksParserExpr >>> ksParserRightParen) {
     (_, expr, _) in expr
-}
+} <?> "Parenthesized Expression"
 
 
 /// {<expr>} ::= {<binary>} | {<call>} | {<identifier>} | <number> | {<ifelse>} | {<parenthesized Expr>}
@@ -148,28 +148,53 @@ internal let ksParserParenExpr: LazyParserT<Expr> =
 //{<expr>} ::= ({<call>} | {<identifier>} | <number> | {<ifelse>} | {<parenthesized Expr>}) (<operator> {<expr>}).?
 
 internal func ksParserExpr () -> ParserT<Expr> {
-
+  
   let expr_ = try_(ksParserParenExpr)
     <|>
     try_(ksParserNumber)
     <|>
-    try_(ksParserVariable)
-    <|>
     try_(ksParserCall)
     <|>
     try_(ksParserIfElse)
-    
+    <|>
+    try_(ksParserVariable)
+  
+  
   let ret = fmap(expr_ >>> (ksParserOperator >>> ksParserExpr).?) {
     (exp1, arg1) -> Expr in
     let (opy) = arg1
     if let (op, y) = opy {
-          return Expr.binary(exp1, op, y)
-        } else {
-          return exp1
-        }
-  }
+      return Expr.binary(exp1, op, y)
+    } else {
+      return exp1
+    }
+  } <?> "Expression"
   return ret()
 }
 
+internal func anize<A> (_ a : ParserT<A>) -> ParserT<Any> {
+  return a.fmap{ (x) -> Any in return x }
+}
+
+internal func anize<A> (_ a : @escaping LazyParserT<A>) -> LazyParserT<Any> {
+  return {a().fmap{ (x) -> Any in return x }}
+}
 
 
+internal let ksParserFile: LazyParserT<File> =
+  fmap(many(anize(ksParserExtern)
+    <|> anize(ksParserDefinition)
+    <|> anize(ksParserExpr))) {
+      (components :[Any]) -> File in
+      let file = File()
+      for component in components {
+        if let extern = component as? Prototype {
+          file.addExtern(extern)
+        } else if let def = component as? Definition {
+          file.addDefinition(def)
+        } else if let expr = component as? Expr {
+          file.addExpression(expr)
+        }
+      }
+      return file
+} <?> "Parse File"
