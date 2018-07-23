@@ -18,8 +18,12 @@ if case let ParserResult.consumed(reply) = result {
     let tokenInput = ParserState<[Token],()>(stateInput: value,
                                              statePos: SourcePos(sourceName: #function),
                                              stateUser: ())
-    let parserResult = ksParserDefinition().unParser(tokenInput)
+    let parserResult: ParserResult<Reply<[Token], (), Definition>>
+      = ksParserDefinition().unParser(tokenInput)
+//    let parserResult
+//      = ksParserExtern.unParser(tokenInput)
     print(parserResult)
+//    print("Okay")
   }
 }
 

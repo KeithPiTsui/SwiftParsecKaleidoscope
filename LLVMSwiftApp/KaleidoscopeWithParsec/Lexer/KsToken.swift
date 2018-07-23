@@ -19,6 +19,25 @@ enum Token {
   case `operator`(BinaryOperator)
 }
 
+extension Token {
+  public var caseNum: Int {
+    switch self {
+    case .leftParen: return 1
+    case .rightParen: return 2
+    case .def: return 3
+    case .extern: return 4
+    case .comma: return 5
+    case .semicolon: return 6
+    case .`if`: return 7
+    case .then: return 8
+    case .`else`: return 9
+    case .identifier(_): return 10
+    case .number(_): return 11
+    case .`operator`(_): return 12
+    }
+  }
+}
+
 extension Token: Equatable {
   static func ==(lhs: Token, rhs: Token) -> Bool {
     switch (lhs, rhs) {

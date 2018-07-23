@@ -15,127 +15,161 @@ internal typealias LazyParserT<A> = () -> ParserT<A>
  
  <params>     ::= <identifier> | <identifier>, <params>
  <prototype>  ::= <identifier> "(" <params> ")"
-
  <extern>     ::= "extern" <prototype> ";"
  <operator>   ::= "+" | "-" | "*" | "/" | "%"
 
- <binary>     ::= <expr> <operator> <expr>
- <arguments>  ::= <expr> | <expr> "," <arguments>
+ {<arguments>}  ::= {<expr>} ("," {<expr>} )*
  
- <call>       ::= <identifier> "(" <arguments> ")"
-
- <ifelse>     ::= "if" <expr> "then" <expr> "else" <expr>
-
-  <definition> ::= "def" <prototype> <expr> ";"
  
- <expr>       ::= <binary> | <call> | <identifier> | <number> | <ifelse> | "(" <expr> ")"
+ {<binary>}     ::= {<expr>} <operator> {<expr>}
+ 
+ 
+ {<call>}       ::= <identifier> "(" {<arguments>} ")"
+ {<ifelse>}     ::= "if" {<expr>} "then" {<expr>} "else" {<expr>}
+ {<definition>} ::= "def" <prototype> {<expr>} ";"
+ {<parenthesized Expr>} =  "(" {<expr>} ")"
+ 
+ {<expr>} ::= ({<call>} | {<identifier>} | <number> | {<ifelse>} | {<parenthesized Expr>}) (<operator> {<expr>}).?
+ 
+ Two issues:
+ a. binary production cause left recursive
+ b. binary production and number or other expr together case ealier exit.
  */
 
-internal let ksParserIdentifier: LazyParserT<String> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.identifier(_) = token { return true } else { return false }}){
-    token  in if case let Token.identifier(name) = token { return name } else { return "" }
+private func tokenCaseMatch(_ token: Token) -> (Token) -> Bool {
+  return { inputToken in
+    return inputToken.caseNum == token.caseNum
+  }
 }
 
-internal let ksParserComma: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.comma = token { return true } else { return false }}, terminal)
+internal let ksParserIdentifier: ParserT<String> = satisfy(tokenCaseMatch(.identifier("")))
+  .fmap{ token  in if case let Token.identifier(name) = token { return name } else { return "" } }
 
-internal let ksParserLeftParen: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.leftParen = token { return true } else { return false }}, terminal)
+internal let ksParserComma: ParserT<()> = satisfy(tokenCaseMatch(.comma)).fmap(terminal)
+internal let ksParserSemicolon: ParserT<()> = satisfy(tokenCaseMatch(.semicolon)).fmap(terminal)
 
-internal let ksParserRightParen: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.rightParen = token { return true } else { return false }}, terminal)
+internal let ksParserLeftParen: ParserT<()> = satisfy(tokenCaseMatch(.leftParen)).fmap(terminal)
 
-internal let ksParserExternKeyword: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.extern = token { return true } else { return false }}, terminal)
+internal let ksParserRightParen: ParserT<()> = satisfy(tokenCaseMatch(.rightParen)).fmap(terminal)
+
+internal let ksParserExternKeyword: ParserT<()> = satisfy(tokenCaseMatch(.extern)).fmap(terminal)
 
 // <operator>   ::= "+" | "-" | "*" | "/" | "%"
-internal let ksParserOperator: LazyParserT<BinaryOperator> = fmap(satisfy{ (token: Token) -> Bool in
+internal let ksParserOperator: ParserT<BinaryOperator> = satisfy{ (token: Token) -> Bool in
   switch token {
   case .`operator`(let op):
     if case BinaryOperator.equals = op { return false } else {return true}
   default: return false
   }
-}){token in if case let Token.`operator`(op) = token {return op} else {fatalError("impossible")} }
+  }.fmap{token in if case let Token.`operator`(op) = token {return op} else {fatalError("impossible")} }
 
 /**
  <params>     ::= <identifier> | <identifier>, <params>
  */
-internal let ksParserCommaId: LazyParserT<String> = ksParserComma >>- {_ in ksParserIdentifier}
-internal let ksParserParams: LazyParserT<[String]> =
-  fmap(ksParserIdentifier >>> many(ksParserCommaId)) { [$0.0] + $0.1}
+internal let ksParserCommaId: ParserT<String> = ksParserComma >>- {_ in ksParserIdentifier}
+internal let ksParserParams: ParserT<[String]> =
+  (ksParserIdentifier >>> many(ksParserCommaId)).fmap{ [$0.0] + $0.1}
 
 
 //<prototype>  ::= <identifier> "(" <params> ")"
 internal let ksParserParenParams = between(ksParserLeftParen, ksParserRightParen, ksParserParams)
-internal let ksParserPrototype: LazyParserT<Prototype> =
-  fmap(ksParserIdentifier >>> ksParserParenParams) { (id, params) -> Prototype in
+internal let ksParserPrototype: ParserT<Prototype> =
+  (ksParserIdentifier >>> ksParserParenParams).fmap { (id, params) -> Prototype in
     Prototype(name: id, params: params)
 }
 
 //<extern>     ::= "extern" <prototype> ";"
-internal let ksParserExtern: LazyParserT<Prototype> = between(ksParserExternKeyword, ksParserComma, ksParserPrototype)
+internal let ksParserExtern: ParserT<Prototype> =
+  (ksParserExternKeyword >>> ksParserPrototype >>> ksParserSemicolon)
+  .fmap{(_, proto, _) in proto}
 
-// <binary>     ::= <expr> <operator> <expr>
+internal let ksParserIf: ParserT<()> = satisfy(tokenCaseMatch(.if)).fmap(terminal)
+
+internal let ksParserThen: ParserT<()> = satisfy(tokenCaseMatch(.then)).fmap(terminal)
+
+internal let ksParserElse: ParserT<()> = satisfy(tokenCaseMatch(.else)).fmap(terminal)
+
+internal let ksParserDef: ParserT<()> = satisfy(tokenCaseMatch(.def)).fmap(terminal)
+
+internal let ksParserNumber: ParserT<Expr> = satisfy(tokenCaseMatch(.number(0))).fmap{ (token) -> Expr in
+  if case Token.number(let num) = token { return Expr.number(num) } else { fatalError("impossible") }
+}
+
+internal let ksParserVariable: ParserT<Expr> = ksParserIdentifier.fmap(Expr.variable)
+
+
+
+/// Mark: Lazy Parser Below
+
+
+/// {<binary>} ::= {<expr>} <operator> {<expr>}
 internal let ksParserBinary: LazyParserT<Expr> =
   fmap(ksParserExpr >>> ksParserOperator >>> ksParserExpr) {
     (lhs, op, rhs) -> Expr in Expr.binary(lhs, op, rhs)
 }
 
 
-// <arguments>  ::= <expr> | <expr> "," <arguments>
-internal let ksParserCommaExpr: LazyParserT<Expr> = ksParserComma >>- {_ in ksParserExpr}
+/// {<arguments>}  ::= {<expr>} ("," {<expr>} )*
+internal let ksParserCommaExpr: LazyParserT<Expr> = ksParserComma >>- ksParserExpr
 internal let ksParserArguments: LazyParserT<[Expr]> =
-    fmap(ksParserExpr >>> many(ksParserCommaExpr)) { [$0.0] + $0.1}
+  fmap(ksParserExpr >>> many(ksParserCommaExpr)) { [$0.0] + $0.1}
 
-//<call>       ::= <identifier> "(" <arguments> ")"
-internal let ksParserParenArguments = between(ksParserLeftParen, ksParserRightParen, ksParserArguments)
+/// {<call>}       ::= <identifier> "(" {<arguments>} ")"
+internal let ksParserParenArguments: LazyParserT<[Expr]> =
+  fmap(ksParserLeftParen >>> ksParserArguments >>> ksParserRightParen) {
+    (_, args, _) in args
+}
+
 internal let ksParserCall: LazyParserT<Expr> =
   fmap(ksParserIdentifier >>> ksParserParenArguments, Expr.call)
 
 
-// <ifelse>     ::= "if" <expr> "then" <expr> "else" <expr>
-internal let ksParserIf: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.if = token { return true } else { return false }}, terminal)
-
-internal let ksParserThen: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.then = token { return true } else { return false }}, terminal)
-
-internal let ksParserElse: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.else = token { return true } else { return false }}, terminal)
-
+/// {<ifelse>}     ::= "if" {<expr>} "then" {<expr>} "else" {<expr>}
 internal let ksParserIfElse: LazyParserT<Expr> =
   fmap(ksParserIf >>> ksParserExpr >>> ksParserThen >>> ksParserExpr >>>  ksParserElse >>> ksParserExpr){
     (_, expr1, _, expr2, _, expr3) -> Expr in Expr.ifelse(expr1, expr2, expr3)
 }
 
-
-
-// <definition> ::= "def" <prototype> <expr> ";"
-internal let ksParserDef: LazyParserT<()> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.def = token { return true } else { return false }}, terminal)
-
+/// {<definition>} ::= "def" <prototype> {<expr>} ";"
 internal let ksParserDefinition: LazyParserT<Definition> =
-  fmap(ksParserDef >>> ksParserPrototype >>> ksParserExpr >>> ksParserComma) {
+  fmap(ksParserDef >>> ksParserPrototype >>> ksParserExpr >>> ksParserSemicolon) {
     (_, proto, expr, _) -> Definition in Definition(prototype: proto, expr: expr)
 }
 
-//<expr>       ::= <binary> | <call> | <identifier> | <number> | <ifelse> | "(" <expr> ")"
-
-internal let ksParserNumber: LazyParserT<Double> = fmap(satisfy{ (token: Token) -> Bool in
-  if case Token.number(_) = token { return true } else { return false }}) { (token) -> Double in
-  if case Token.number(let num) = token { return num } else { fatalError("impossible") }
+/// {<parenthesized Expr>} =  "(" {<expr>} ")"
+internal let ksParserParenExpr: LazyParserT<Expr> =
+  fmap(ksParserLeftParen >>> ksParserExpr >>> ksParserRightParen) {
+    (_, expr, _) in expr
 }
 
-internal let ksParserVariable: LazyParserT<Expr> = fmap(ksParserIdentifier, Expr.variable)
 
+/// {<expr>} ::= {<binary>} | {<call>} | {<identifier>} | <number> | {<ifelse>} | {<parenthesized Expr>}
 
-internal func ksParserExpr() -> ParserT<Expr> {
-  return (try_(ksParserBinary)
-    <|> try_(ksParserCall)
-    <|> try_(ksParserVariable)
-    <|> try_(fmap(ksParserNumber, Expr.number))
-    <|> try_(ksParserIfElse)
-    <|> try_(between(ksParserLeftParen, ksParserRightParen, {ksParserExpr()}))
-    )()
+//{<expr>} ::= ({<call>} | {<identifier>} | <number> | {<ifelse>} | {<parenthesized Expr>}) (<operator> {<expr>}).?
+
+internal func ksParserExpr () -> ParserT<Expr> {
+
+  let expr_ = try_(ksParserParenExpr)
+    <|>
+    try_(ksParserNumber)
+    <|>
+    try_(ksParserVariable)
+    <|>
+    try_(ksParserCall)
+    <|>
+    try_(ksParserIfElse)
+    
+  let ret = fmap(expr_ >>> (ksParserOperator >>> ksParserExpr).?) {
+    (exp1, arg1) -> Expr in
+    let (opy) = arg1
+    if let (op, y) = opy {
+          return Expr.binary(exp1, op, y)
+        } else {
+          return exp1
+        }
+  }
+  return ret()
 }
+
+
 
