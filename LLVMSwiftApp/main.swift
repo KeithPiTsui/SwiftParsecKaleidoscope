@@ -8,7 +8,7 @@
 
 import PaversParsec
 
-let input = ParserStateS("extern sqrt(n); def foo(n) (n * sqrt(n * 200) + 57 * n % 2);")
+let input = ParserStateS("def sqr(n) (n * n); def foo(n) (n * sqr(n * 3) + 57 * n % 2); foo(12);")
 //let input = ParserStateS("sqrt(n * 200)")
 let result = KsLexer.tokenList.unParser(input)
 
@@ -29,9 +29,21 @@ if case let ParserResult.consumed(reply) = result {
 //      = ksParserExpr().unParser(tokenInput)
     print(parserResult)
 //    print("Okay")
+
+    if case let ParserResult.consumed(reply_) = parserResult {
+      let rr_ = reply_()
+      if case let .ok(file, _, _) = rr_ {
+        print(file)
+        let irGen = IRGenerator(file: file)
+        try irGen.emit()
+        irGen.module.dump()
+        try irGen.module.verify()
+      }
+    }
   }
 }
 
+//try REPL().run()
 
 
 //extension String: Error {}
@@ -42,7 +54,7 @@ if case let ParserResult.consumed(reply) = result {
 //  guard CommandLine.arguments.count > 1 else {
 //    throw "usage: kaleidoscope <file>"
 //  }
-//  
+//
 //  let input: String = try String(contentsOfFile: CommandLine.arguments[1])
 //  let toks: [Token] = Lexer(input: input).lex()
 //  let file: File = try Parser(tokens: toks).parseFile()

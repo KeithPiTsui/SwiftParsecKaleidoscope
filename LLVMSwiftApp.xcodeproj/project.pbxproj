@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53CAB6ED2105AC6E00AE494D /* IRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980D2210033B800C3EFE9 /* IRGenerator.swift */; };
+		53CAB6F02105AEB300AE494D /* REPL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EFE9F7210033E00051CBF4 /* REPL.swift */; };
 		53D980722100293E00C3EFE9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D980712100293E00C3EFE9 /* main.swift */; };
 		53D980A32100298300C3EFE9 /* IRValue+Kinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807A2100298300C3EFE9 /* IRValue+Kinds.swift */; };
 		53D980A42100298300C3EFE9 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D9807B2100298300C3EFE9 /* Constant.swift */; };
@@ -607,6 +609,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53CAB6EE2105AE9D00AE494D /* IR */ = {
+			isa = PBXGroup;
+			children = (
+				53D980D2210033B800C3EFE9 /* IRGenerator.swift */,
+			);
+			path = IR;
+			sourceTree = "<group>";
+		};
+		53CAB6EF2105AEA800AE494D /* REPL */ = {
+			isa = PBXGroup;
+			children = (
+				53EFE9F7210033E00051CBF4 /* REPL.swift */,
+			);
+			path = REPL;
+			sourceTree = "<group>";
+		};
 		53D980652100293E00C3EFE9 = {
 			isa = PBXGroup;
 			children = (
@@ -714,10 +732,8 @@
 			isa = PBXGroup;
 			children = (
 				53D980D4210033B800C3EFE9 /* AST.swift */,
-				53D980D2210033B800C3EFE9 /* IRGenerator.swift */,
 				53D980D5210033B800C3EFE9 /* Lexer.swift */,
 				53D980D3210033B800C3EFE9 /* KParser.swift */,
-				53EFE9F7210033E00051CBF4 /* REPL.swift */,
 			);
 			path = Kaleidoscope;
 			sourceTree = "<group>";
@@ -725,6 +741,8 @@
 		53EFEA1A210036A00051CBF4 /* KaleidoscopeWithParsec */ = {
 			isa = PBXGroup;
 			children = (
+				53CAB6EF2105AEA800AE494D /* REPL */,
+				53CAB6EE2105AE9D00AE494D /* IR */,
 				53EFEDB321006A450051CBF4 /* Parser */,
 				53EFEDB221006A3B0051CBF4 /* Lexer */,
 			);
@@ -1499,6 +1517,7 @@
 				53D980C42100298300C3EFE9 /* TokenType.swift in Sources */,
 				53D980B52100298300C3EFE9 /* Alias.swift in Sources */,
 				53D980A32100298300C3EFE9 /* IRValue+Kinds.swift in Sources */,
+				53CAB6ED2105AC6E00AE494D /* IRGenerator.swift in Sources */,
 				53D980AB2100298300C3EFE9 /* Initialization.swift in Sources */,
 				53D980C12100298300C3EFE9 /* LabelType.swift in Sources */,
 				53D980722100293E00C3EFE9 /* main.swift in Sources */,
@@ -1524,6 +1543,7 @@
 				53EFEA1C210036C00051CBF4 /* KsLexer.swift in Sources */,
 				53EFEDAE210069850051CBF4 /* KsToken.swift in Sources */,
 				53D980BA2100298300C3EFE9 /* ArrayType.swift in Sources */,
+				53CAB6F02105AEB300AE494D /* REPL.swift in Sources */,
 				53D980C62100298300C3EFE9 /* IRType.swift in Sources */,
 				53EFEDB721006EAB0051CBF4 /* KsAST.swift in Sources */,
 				53D980B72100298300C3EFE9 /* IntType.swift in Sources */,

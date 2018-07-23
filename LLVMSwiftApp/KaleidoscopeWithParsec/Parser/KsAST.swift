@@ -24,7 +24,7 @@ internal enum Expr {
   indirect case call(String, [Expr])
 }
 
-internal class File {
+internal final class File {
   private(set) var externs = [Prototype]()
   private(set) var definitions = [Definition]()
   private(set) var expressions = [Expr]()
